@@ -1,5 +1,5 @@
 
-# RepoLens AI 🚀
+# RepoLens AI 
 ### Understand Any GitHub Repository in Minutes
 
 RepoLens AI is an AI-powered developer platform that analyzes GitHub repositories and generates architecture insights, contributor onboarding guides, code explanations, and interactive visualizations — all automatically.
@@ -8,38 +8,38 @@ Built for developers, open-source contributors, students, and teams who want to 
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔍 Repository Analysis
+###  Repository Analysis
 - Parse any public GitHub repository
 - Detect frameworks, languages, and architecture
 - Generate intelligent project summaries
 
-### 🧠 AI Code Understanding
+### AI Code Understanding
 - Explain folders, files, and components
 - Describe code flow and dependencies
 - Simplify complex logic into human-readable explanations
 
-### 🗺️ Architecture Visualization
+###  Architecture Visualization
 - Interactive dependency graphs
 - Frontend/backend relationship mapping
 - API and module flow diagrams
 - Component hierarchy visualization
 
-### 🤝 Contributor Onboarding
+###  Contributor Onboarding
 - Auto-generated setup instructions
 - Beginner-friendly file recommendations
 - Suggested “good first issues”
 - Contribution workflow guidance
 
-### 💬 Chat With Your Repository
+###  Chat With Your Repository
 Ask questions like:
 - “Where is authentication handled?”
 - “Explain the API flow”
 - “Which file manages state?”
 - “How do I run this project?”
 
-### 📊 Code Intelligence
+###  Code Intelligence
 - Complexity analysis
 - Dependency heatmaps
 - Dead code detection
@@ -47,7 +47,7 @@ Ask questions like:
 
 ---
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 ## Frontend
 - Next.js
