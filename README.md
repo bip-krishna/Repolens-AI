@@ -1,108 +1,36 @@
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-# RepoLens AI 
-### Understand Any GitHub Repository in Minutes
+## Getting Started
 
-RepoLens AI is an AI-powered developer platform that analyzes GitHub repositories and generates architecture insights, contributor onboarding guides, code explanations, and interactive visualizations — all automatically.
+First, run the development server:
 
-Built for developers, open-source contributors, students, and teams who want to quickly understand unfamiliar codebases.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-##  Features
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-###  Repository Analysis
-- Parse any public GitHub repository
-- Detect frameworks, languages, and architecture
-- Generate intelligent project summaries
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### AI Code Understanding
-- Explain folders, files, and components
-- Describe code flow and dependencies
-- Simplify complex logic into human-readable explanations
+## Learn More
 
-###  Architecture Visualization
-- Interactive dependency graphs
-- Frontend/backend relationship mapping
-- API and module flow diagrams
-- Component hierarchy visualization
+To learn more about Next.js, take a look at the following resources:
 
-###  Contributor Onboarding
-- Auto-generated setup instructions
-- Beginner-friendly file recommendations
-- Suggested “good first issues”
-- Contribution workflow guidance
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-###  Chat With Your Repository
-Ask questions like:
-- “Where is authentication handled?”
-- “Explain the API flow”
-- “Which file manages state?”
-- “How do I run this project?”
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-###  Code Intelligence
-- Complexity analysis
-- Dependency heatmaps
-- Dead code detection
-- Repository health insights
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-#  Tech Stack
-
-## Frontend
-- Next.js
-- React
-- Tailwind CSS
-- shadcn/ui
-- Framer Motion
-- React Flow
-
-## Backend
-- Node.js / FastAPI
-- Express.js
-
-## AI & Parsing
-- Gemini API / OpenAI API
-- LangChain
-- Tree-sitter
-- ts-morph
-- Babel Parser
-
-## Database
-- PostgreSQL / MongoDB
-
-## DevOps
-- Docker
-- Vercel
-- GitHub Actions
-
----
-
-# 🧩 System Architecture
-
-```txt
-                ┌────────────────────┐
-                │    GitHub Repo     │
-                └─────────┬──────────┘
-                          │
-                          ▼
-                ┌────────────────────┐
-                │   Repo Cloner      │
-                └─────────┬──────────┘
-                          │
-                          ▼
-                ┌────────────────────┐
-                │   Code Parser      │
-                └─────────┬──────────┘
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-┌──────────────┐ ┌──────────────┐ ┌────────────────┐
-│ AI Summaries │ │ Architecture │ │ Dependency Map │
-└──────┬───────┘ └──────┬───────┘ └────────┬───────┘
-       │                │                  │
-       └────────────────┼──────────────────┘
-                        ▼
-             ┌──────────────────┐
-             │  Frontend UI     │
-             └──────────────────┘
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
