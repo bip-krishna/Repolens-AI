@@ -1,24 +1,31 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 import type { AISummary, OnboardingGuide } from "@/types";
 
+const MODEL = "llama-3.3-70b-versatile"; // Very fast and smart model
+
 function getClient() {
-  const apiKey = process.env.GOOGLE_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    throw new Error("GOOGLE_API_KEY is not set. Get one at https://aistudio.google.com/");
+    throw new Error("GROQ_API_KEY is not set. Get one at https://console.groq.com/");
   }
-  return new GoogleGenerativeAI(apiKey);
+  return new Groq({ apiKey });
 }
 
 export async function generateSummary(prompt: string): Promise<AISummary> {
   const client = getClient();
-  const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
-  const result = await model.generateContent(prompt);
-  const text = result.response.text();
+  const result = await client.chat.completions.create({
+    messages: [
+      { role: "system", content: "You are a helpful AI that analyzes codebases. Return the result strictly in valid JSON format without markdown wrapping." },
+      { role: "user", content: prompt }
+    ],
+    model: MODEL,
+    response_format: { type: "json_object" },
+  });
+
+  const text = result.choices[0]?.message?.content || "";
 
   try {
-    // Try to parse JSON from the response (may be wrapped in markdown)
-    const cleaned = text.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-    return JSON.parse(cleaned);
+    return JSON.parse(text);
   } catch {
     return {
       overview: text.slice(0, 500),
@@ -33,44 +40,55 @@ export async function generateSummary(prompt: string): Promise<AISummary> {
 
 export async function generateExplanation(prompt: string): Promise<string> {
   const client = getClient();
-  const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
-  const result = await model.generateContent(prompt);
-  return result.response.text();
+  const result = await client.chat.completions.create({
+    messages: [
+      { role: "system", content: "You are a helpful AI that explains code. Be concise." },
+      { role: "user", content: prompt }
+    ],
+    model: MODEL,
+  });
+  return result.choices[0]?.message?.content || "";
 }
 
 export async function* streamChat(systemPrompt: string, messages: { role: string; content: string }[]) {
   const client = getClient();
-  const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
+  
+  // Format messages for Groq API
+  const formattedMessages = messages.map(m => ({
+    role: m.role as "user" | "assistant",
+    content: m.content
+  }));
 
-  const chat = model.startChat({
-    history: [
-      { role: "user", parts: [{ text: "You are RepoLens AI assistant. " + systemPrompt }] },
-      { role: "model", parts: [{ text: "I understand. I'm ready to help analyze this repository. What would you like to know?" }] },
-      ...messages.slice(0, -1).map((m) => ({
-        role: m.role === "user" ? "user" as const : "model" as const,
-        parts: [{ text: m.content }],
-      })),
+  const stream = await client.chat.completions.create({
+    messages: [
+      { role: "system", content: "You are RepoLens AI assistant. " + systemPrompt },
+      ...formattedMessages
     ],
+    model: MODEL,
+    stream: true,
   });
 
-  const lastMessage = messages[messages.length - 1];
-  const result = await chat.sendMessageStream(lastMessage.content);
-
-  for await (const chunk of result.stream) {
-    const text = chunk.text();
+  for await (const chunk of stream) {
+    const text = chunk.choices[0]?.delta?.content || "";
     if (text) yield text;
   }
 }
 
 export async function generateOnboarding(prompt: string): Promise<OnboardingGuide> {
   const client = getClient();
-  const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
-  const result = await model.generateContent(prompt);
-  const text = result.response.text();
+  const result = await client.chat.completions.create({
+    messages: [
+      { role: "system", content: "You are a helpful AI that helps onboard developers to a codebase. Return the result strictly in valid JSON format without markdown wrapping." },
+      { role: "user", content: prompt }
+    ],
+    model: MODEL,
+    response_format: { type: "json_object" },
+  });
+
+  const text = result.choices[0]?.message?.content || "";
 
   try {
-    const cleaned = text.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-    return JSON.parse(cleaned);
+    return JSON.parse(text);
   } catch {
     return {
       prerequisites: ["Node.js", "Git"],

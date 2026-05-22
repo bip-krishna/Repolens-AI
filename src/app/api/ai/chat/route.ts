@@ -11,8 +11,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "No messages provided" }, { status: 400 });
     }
 
-    if (!process.env.GOOGLE_API_KEY) {
-      return NextResponse.json({ success: false, error: "GOOGLE_API_KEY not configured" }, { status: 500 });
+    if (!process.env.GROQ_API_KEY) {
+      return NextResponse.json({ success: false, error: "GROQ_API_KEY not configured" }, { status: 500 });
     }
 
     const systemPrompt = chatSystemPrompt(

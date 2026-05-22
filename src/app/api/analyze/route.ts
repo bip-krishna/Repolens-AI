@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
 
     // Generate AI summary (if API key is available)
     let summary = null;
-    if (process.env.GOOGLE_API_KEY) {
+    if (process.env.GROQ_API_KEY) {
       try {
         const treeStr = treeItems.slice(0, 200).map((i) => i.path).join("\n");
         const prompt = repoSummaryPrompt(`${owner}/${repo}`, treeStr, readme, packageJsonStr);
