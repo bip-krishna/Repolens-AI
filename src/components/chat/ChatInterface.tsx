@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Send, Square, Bot, User, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChat } from "@/hooks/useChat";
 import type { ChatMessage } from "@/types";
 
@@ -57,7 +56,12 @@ export function ChatInterface({
 }) {
   const { messages, sendMessage, isStreaming, stopStreaming } = useChat(repoName, treeStr, summary);
   const [input, setInput] = useState("");
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,9 +72,9 @@ export function ChatInterface({
 
   return (
     <div className="flex flex-col h-[600px] rounded-xl glass overflow-hidden">
-      {/* Messages */}
-      <ScrollArea className="flex-1 p-4">
-        <div ref={scrollRef} className="flex flex-col gap-4">
+      {/* Messages — plain div with overflow-y-auto instead of ScrollArea */}
+      <div className="flex-1 overflow-y-auto p-4 scroll-smooth">
+        <div className="flex flex-col gap-4">
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full py-12 gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/20">
@@ -96,11 +100,13 @@ export function ChatInterface({
           {messages.map((msg) => (
             <MessageBubble key={msg.id} message={msg} />
           ))}
+          {/* Invisible element at the bottom to scroll into view */}
+          <div ref={bottomRef} />
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-border/50">
+      <form onSubmit={handleSubmit} className="shrink-0 p-4 border-t border-border/50">
         <div className="flex gap-2">
           <input
             type="text"
