@@ -18,7 +18,7 @@ export function Footer() {
           </div>
 
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} RepoLens AI. Built with ❤️ by Krishna.
+            © {new Date().getFullYear()} RepoLens AI. Built with ❤️ for developers.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
