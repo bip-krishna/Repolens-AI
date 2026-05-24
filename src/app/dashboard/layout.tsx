@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, LayoutDashboard, Search, Settings, ArrowLeft, Hexagon } from "lucide-react";
+import { Sparkles, LayoutDashboard, Search, Settings, ArrowLeft, Hexagon, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -57,8 +57,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
 
         {/* Dashboard Area */}
-        <div className="flex-1 overflow-auto liquid-glass-strong rounded-3xl p-6 lg:p-10 relative">
-          {children}
+        <div className="flex-1 flex flex-col overflow-auto liquid-glass-strong rounded-3xl p-6 lg:p-10 relative">
+          <div className="flex-1">
+            {children}
+          </div>
+          
+          {/* Footer inside Dashboard */}
+          <footer className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+             <div className="flex items-center gap-2">
+               <div className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center">
+                 <Hexagon className="w-3.5 h-3.5 text-white" />
+               </div>
+               <span className="font-semibold tracking-tight text-white text-sm">RepoLens</span>
+             </div>
+             
+             <div className="text-white/50 text-sm flex items-center">
+               © 2026 RepoLens AI. Built with <Heart className="w-3 h-3 text-white/80 mx-1" fill="currentColor" /> by Krishna.
+             </div>
+          </footer>
         </div>
       </main>
     </div>
