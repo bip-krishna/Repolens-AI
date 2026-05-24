@@ -6,9 +6,9 @@ import {
   ArrowRight,
   Menu,
   Hexagon,
-  TwitterIcon,
-  LinkedinIcon,
-  InstagramIcon
+  // TwitterIcon,
+  // LinkedinIcon,
+  // InstagramIcon
 } from "lucide-react";
 
 export default function HomePage() {
@@ -99,7 +99,7 @@ export default function HomePage() {
           {/* Top Bar */}
           <div className="flex items-center justify-between">
             <div className="liquid-glass rounded-full px-4 py-2 flex items-center gap-3">
-              <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
+              {/* <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
                 <Twitter className="w-4 h-4" />
               </a>
               <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
@@ -107,7 +107,7 @@ export default function HomePage() {
               </a>
               <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
                 <Instagram className="w-4 h-4" />
-              </a>
+              </a> */}
               <div className="w-[1px] h-4 bg-white/20 mx-1"></div>
               <button className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform group">
                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
