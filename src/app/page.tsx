@@ -59,9 +59,9 @@ export default function HomePage() {
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                   <Hexagon className="w-4 h-4 text-white" />
                 </div>
-                <span className="font-semibold text-2xl tracking-tighter text-white">
-                  repolens
-                </span>
+                <span className="font-semibold text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/30 drop-shadow-sm">
+                repolens
+              </span>
               </div>
               <button className="liquid-glass w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
                 <Menu className="w-4 h-4 text-white" />
@@ -142,7 +142,7 @@ export default function HomePage() {
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-[1px] bg-white/20"></div>
-                <span className="text-sm font-medium tracking-widest text-white/70">MAR</span>
+                <span className="text-sm font-medium tracking-widest text-white/70">KRISHNA</span>
                 <div className="w-12 h-[1px] bg-white/20"></div>
               </div>
             </div>
@@ -151,23 +151,7 @@ export default function HomePage() {
           {/* Right Panel (Desktop Only) */}
           <div className="hidden lg:flex w-[48%] flex-col gap-6">
             {/* Top Bar */}
-            <div className="flex items-center justify-between">
-              <div className="liquid-glass rounded-full px-4 py-2 flex items-center gap-3">
-                <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/120px-X_logo_2023.svg.png" alt="Twitter" className="w-4 h-4 object-contain brightness-0 invert" />
-                </Link>
-                <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/120px-LinkedIn_logo_initials.png" alt="LinkedIn" className="w-4 h-4 object-contain brightness-0 invert" />
-                </Link>
-                <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/120px-Instagram_logo_2016.svg.png" alt="Instagram" className="w-4 h-4 object-contain brightness-0 invert" />
-                </Link>
-                <div className="w-[1px] h-4 bg-white/20 mx-1"></div>
-                <button className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform group">
-                  <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              </div>
-              
+            <div className="flex items-center justify-end w-full">
               <Link href="/dashboard" className="liquid-glass rounded-full pl-5 pr-2 py-2 flex items-center gap-3 hover:scale-105 active:scale-95 transition-transform">
                 <span className="text-sm font-medium text-white">Account</span>
                 <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
@@ -314,7 +298,6 @@ export default function HomePage() {
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> Next.js</div>
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> React</div>
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> Tailwind CSS</div>
-                <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> shadcn/ui</div>
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> Framer Motion</div>
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> React Flow</div>
               </div>
@@ -324,7 +307,7 @@ export default function HomePage() {
               <h3 className="text-sm font-medium tracking-widest text-white/50 mb-6 uppercase">Backend & AI</h3>
               <div className="flex flex-wrap gap-3">
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/60"></div> Node.js</div>
-                <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/60"></div> Gemini API</div>
+                <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/60"></div> Groq server</div>
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/60"></div> GitHub API</div>
               </div>
             </div>

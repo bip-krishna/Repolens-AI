@@ -7,13 +7,13 @@ const techStack = [
     { name: "Next.js", color: "#fff" },
     { name: "React", color: "#61DAFB" },
     { name: "Tailwind CSS", color: "#06B6D4" },
-    { name: "shadcn/ui", color: "#fff" },
+    { name: "", color: "#fff" },
     { name: "Framer Motion", color: "#FF0080" },
     { name: "React Flow", color: "#FF0072" },
   ]},
   { category: "Backend & AI", items: [
     { name: "Node.js", color: "#68A063" },
-    { name: "Gemini API", color: "#8B5CF6" },
+    { name: "Groq server", color: "#8B5CF6" },
     { name: "GitHub API", color: "#fff" },
   ]},
   { category: "Infrastructure", items: [

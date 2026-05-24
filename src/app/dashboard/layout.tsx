@@ -57,13 +57,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
 
         {/* Dashboard Area */}
-        <div className="flex-1 flex flex-col overflow-auto liquid-glass-strong rounded-3xl p-6 lg:p-10 relative">
-          <div className="flex-1">
+        <div className="flex-1 flex flex-col liquid-glass-strong rounded-3xl relative overflow-hidden">
+          <div className="flex-1 overflow-auto p-6 lg:p-10">
             {children}
           </div>
           
           {/* Footer inside Dashboard */}
-          <footer className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <footer className="shrink-0 py-4 px-6 lg:px-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 bg-black/20 z-10 relative">
              <div className="flex items-center gap-2">
                <div className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center">
                  <Hexagon className="w-3.5 h-3.5 text-white" />
