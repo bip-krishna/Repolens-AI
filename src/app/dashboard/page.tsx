@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Search, ArrowRight, GitBranch, Clock, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Search, ArrowRight, GitBranch, Star } from "lucide-react";
 
 const popularRepos = [
   { owner: "facebook", repo: "react", desc: "A JavaScript library for building user interfaces", stars: "224k" },
@@ -32,55 +31,55 @@ export default function DashboardHome() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">Analyze any GitHub repository with AI</p>
+    <div className="max-w-4xl mx-auto text-white">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center">
+        <h1 className="text-4xl lg:text-5xl font-medium tracking-tight mb-4">Dashboard</h1>
+        <p className="text-white/60 text-lg">Analyze any GitHub repository with AI</p>
       </motion.div>
 
       {/* Search */}
       <motion.form
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
         onSubmit={handleSubmit}
-        className="mb-12"
+        className="mb-16 max-w-2xl mx-auto"
       >
-        <div className="flex gap-2 p-2 rounded-2xl glass-strong glow-purple">
-          <div className="flex items-center gap-2 flex-1 pl-3">
-            <Search className="h-5 w-5 text-muted-foreground shrink-0" />
-            <input
-              type="text" value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)}
-              placeholder="Paste a GitHub URL or owner/repo..."
-              className="flex-1 bg-transparent text-sm placeholder:text-muted-foreground/50 focus:outline-none h-10"
-            />
+        <div className="relative flex items-center liquid-glass-strong rounded-full p-1.5 border border-white/10 focus-within:border-white/30 transition-colors">
+          <div className="pl-5 pr-2">
+            <Search className="h-5 w-5 text-white/50" />
           </div>
-          <Button type="submit" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl px-6">
-            Analyze <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <input
+            type="text" value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)}
+            placeholder="Paste a GitHub URL or owner/repo..."
+            className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white/40 h-12"
+          />
+          <button type="submit" className="liquid-glass rounded-full px-6 h-11 flex items-center gap-2 hover:bg-white/10 transition-colors shrink-0 font-medium text-sm">
+            Analyze <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       </motion.form>
 
       {/* Popular repos */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <GitBranch className="h-5 w-5 text-purple-400" />
+        <h2 className="text-lg font-medium mb-6 flex items-center gap-3 text-white/80">
+          <GitBranch className="h-5 w-5" />
           Popular Repositories
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {popularRepos.map((r) => (
             <button
               key={`${r.owner}/${r.repo}`}
               onClick={() => router.push(`/dashboard/${r.owner}/${r.repo}`)}
-              className="flex flex-col gap-1 p-4 rounded-xl glass hover:bg-white/5 transition-all text-left group"
+              className="flex flex-col gap-3 p-6 rounded-3xl liquid-glass hover:scale-[1.02] active:scale-[0.98] transition-transform text-left group"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium group-hover:text-purple-400 transition-colors">
-                  {r.owner}/<span className="font-bold">{r.repo}</span>
+              <div className="flex items-center justify-between w-full">
+                <span className="text-base text-white/80 group-hover:text-white transition-colors">
+                  {r.owner}/<span className="font-semibold text-white">{r.repo}</span>
                 </span>
-                <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1.5 text-xs text-white/60 bg-white/5 px-2.5 py-1 rounded-full">
                   <Star className="h-3 w-3" /> {r.stars}
                 </span>
               </div>
-              <span className="text-xs text-muted-foreground">{r.desc}</span>
+              <span className="text-sm text-white/50 leading-relaxed">{r.desc}</span>
             </button>
           ))}
         </div>

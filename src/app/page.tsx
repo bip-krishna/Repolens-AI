@@ -1,17 +1,35 @@
-import {
-  Sparkles,
-  Download,
-  Wand2,
-  BookOpen,
-  ArrowRight,
-  Menu,
-  Hexagon,
-  // TwitterIcon,
-  // LinkedinIcon,
-  // InstagramIcon
-} from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Sparkles, Wand2, BookOpen, ArrowRight, Menu, Hexagon, Search } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
+  const [repoUrl, setRepoUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handleAnalyze = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!repoUrl.trim()) return;
+
+    const match = repoUrl.match(
+      /(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/([^\/\s#?]+)/
+    );
+    if (match) {
+      const [, owner, repo] = match;
+      setIsLoading(true);
+      router.push(`/dashboard/${owner}/${repo.replace(/\.git$/, "")}`);
+    } else {
+      const parts = repoUrl.trim().split("/");
+      if (parts.length === 2) {
+        setIsLoading(true);
+        router.push(`/dashboard/${parts[0]}/${parts[1]}`);
+      }
+    }
+  };
+
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-black text-white selection:bg-white/20">
       {/* Video Background */}
@@ -48,32 +66,65 @@ export default function HomePage() {
 
           {/* Hero Center */}
           <div className="flex-1 flex flex-col items-center justify-center text-center mt-12 mb-12">
-            <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-10">
+            <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-8">
               <Hexagon className="w-10 h-10 text-white" />
             </div>
             
-            <h1 className="text-6xl lg:text-7xl font-medium tracking-[-0.05em] text-white leading-tight mb-10 max-w-2xl">
+            <h1 className="text-5xl lg:text-7xl font-medium tracking-[-0.05em] text-white leading-tight mb-8 max-w-2xl">
               Innovating the <br />
               <span className="font-serif italic text-white/80">intelligence of</span> Repolens AI
             </h1>
 
-            <button className="liquid-glass-strong rounded-full pl-6 pr-2 py-2.5 flex items-center gap-4 hover:scale-105 active:scale-95 transition-transform group">
-              <span className="font-medium text-white text-sm">Explore Now</span>
-              <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
-                <Download className="w-3.5 h-3.5 text-white" />
+            <form onSubmit={handleAnalyze} className="w-full max-w-md relative flex flex-col items-center">
+              <div className="w-full relative flex items-center liquid-glass-strong rounded-full p-1 border border-white/10 group focus-within:border-white/30 transition-colors">
+                <div className="pl-5 pr-2">
+                  <Search className="w-5 h-5 text-white/50" />
+                </div>
+                <input
+                  type="text"
+                  value={repoUrl}
+                  onChange={(e) => setRepoUrl(e.target.value)}
+                  placeholder="Paste a GitHub URL or owner/repo..."
+                  className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white/40 h-10"
+                />
+                <button 
+                  type="submit" 
+                  disabled={isLoading}
+                  className="w-10 h-10 shrink-0 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors disabled:opacity-50"
+                >
+                  {isLoading ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <ArrowRight className="w-4 h-4 text-white" />
+                  )}
+                </button>
               </div>
-            </button>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-[10px] sm:text-xs text-white/50 font-medium tracking-wide">
+                <span>TRY:</span>
+                <button type="button" onClick={() => setRepoUrl("facebook/react")} className="hover:text-white transition-colors">facebook/react</button>
+                <span className="w-1 h-1 rounded-full bg-white/20 mx-1"></span>
+                <button type="button" onClick={() => setRepoUrl("vercel/next.js")} className="hover:text-white transition-colors">vercel/next.js</button>
+                <span className="w-1 h-1 rounded-full bg-white/20 mx-1"></span>
+                <button type="button" onClick={() => setRepoUrl("microsoft/vscode")} className="hover:text-white transition-colors">microsoft/vscode</button>
+              </div>
+            </form>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 mt-14">
-              <span className="liquid-glass rounded-full px-4 py-2 text-xs text-white/80">
-                Architecture Visualization
-              </span>
-              <span className="liquid-glass rounded-full px-4 py-2 text-xs text-white/80">
-                Code Explanation
-              </span>
-              <span className="liquid-glass rounded-full px-4 py-2 text-xs text-white/80">
-                Dependency Maps
-              </span>
+            {/* Stats Row */}
+            <div className="flex flex-wrap items-center justify-center gap-6 mt-10 w-full max-w-md border-t border-white/10 pt-8">
+              <div className="flex flex-col items-center">
+                <span className="text-2xl font-bold text-white mb-1">10K+</span>
+                <span className="text-[10px] uppercase tracking-widest text-white/50">Repos Analyzed</span>
+              </div>
+              <div className="w-[1px] h-8 bg-white/10"></div>
+              <div className="flex flex-col items-center">
+                <span className="text-2xl font-bold text-white mb-1">50K+</span>
+                <span className="text-[10px] uppercase tracking-widest text-white/50">AI Insights</span>
+              </div>
+              <div className="w-[1px] h-8 bg-white/10"></div>
+              <div className="flex flex-col items-center">
+                <span className="text-2xl font-bold text-white mb-1">1000h+</span>
+                <span className="text-[10px] uppercase tracking-widest text-white/50">Time Saved</span>
+              </div>
             </div>
           </div>
 
@@ -99,27 +150,27 @@ export default function HomePage() {
           {/* Top Bar */}
           <div className="flex items-center justify-between">
             <div className="liquid-glass rounded-full px-4 py-2 flex items-center gap-3">
-              {/* <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
-                <Instagram className="w-4 h-4" />
-              </a> */}
+              <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/120px-X_logo_2023.svg.png" alt="Twitter" className="w-4 h-4 object-contain brightness-0 invert" />
+              </Link>
+              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/120px-LinkedIn_logo_initials.png" alt="LinkedIn" className="w-4 h-4 object-contain brightness-0 invert" />
+              </Link>
+              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform text-white hover:text-white/80">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/120px-Instagram_logo_2016.svg.png" alt="Instagram" className="w-4 h-4 object-contain brightness-0 invert" />
+              </Link>
               <div className="w-[1px] h-4 bg-white/20 mx-1"></div>
               <button className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform group">
                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
             
-            <button className="liquid-glass rounded-full pl-5 pr-2 py-2 flex items-center gap-3 hover:scale-105 active:scale-95 transition-transform">
+            <Link href="/dashboard" className="liquid-glass rounded-full pl-5 pr-2 py-2 flex items-center gap-3 hover:scale-105 active:scale-95 transition-transform">
               <span className="text-sm font-medium text-white">Account</span>
               <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
                 <Sparkles className="w-3.5 h-3.5 text-white" />
               </div>
-            </button>
+            </Link>
           </div>
 
           {/* Community Card */}
@@ -133,7 +184,7 @@ export default function HomePage() {
           {/* Bottom Feature Section */}
           <div className="mt-auto liquid-glass rounded-[2.5rem] p-6 flex gap-4">
             {/* Card 1 */}
-            <div className="flex-1 liquid-glass rounded-3xl p-6 flex flex-col justify-between aspect-square group hover:scale-105 transition-transform cursor-pointer">
+            <Link href="/dashboard" className="flex-1 liquid-glass rounded-3xl p-6 flex flex-col justify-between aspect-square group hover:scale-105 transition-transform cursor-pointer">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                 <Wand2 className="w-5 h-5 text-white" />
               </div>
@@ -141,10 +192,10 @@ export default function HomePage() {
                 <h4 className="font-medium text-lg text-white mb-1">Analysis</h4>
                 <p className="text-xs text-white/60">Automated architecture mapping</p>
               </div>
-            </div>
+            </Link>
 
             {/* Card 2 */}
-            <div className="flex-1 liquid-glass rounded-3xl p-6 flex flex-col justify-between aspect-square group hover:scale-105 transition-transform cursor-pointer">
+            <Link href="/dashboard" className="flex-1 liquid-glass rounded-3xl p-6 flex flex-col justify-between aspect-square group hover:scale-105 transition-transform cursor-pointer">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
@@ -152,7 +203,7 @@ export default function HomePage() {
                 <h4 className="font-medium text-lg text-white mb-1">Insights</h4>
                 <p className="text-xs text-white/60">Comprehensive codebase context</p>
               </div>
-            </div>
+            </Link>
           </div>
           
         </div>
