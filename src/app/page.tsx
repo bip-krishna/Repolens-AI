@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Sparkles, Wand2, BookOpen, ArrowRight, Menu, Hexagon, Search, Network, Users, MessageSquare, Activity, Heart, GitMerge, FileCode, Layers, Server, Monitor } from "lucide-react";
+import { Sparkles, Wand2, BookOpen, ArrowRight, Menu, Hexagon, Search, Network, Users, MessageSquare, Activity, Heart, GitMerge, FileCode, Layers, Server, Monitor, Bot } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
   const [repoUrl, setRepoUrl] = useState("");
@@ -40,7 +41,7 @@ export default function HomePage() {
         playsInline
         className="fixed inset-0 w-full h-full object-cover z-0 opacity-90"
       >
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260315_073750_51473149-4350-4920-ae24-c8214286f323.mp4" type="video/mp4" />
+        <source src="https://www.pexels.com/download/video/3129902/" type="video/mp4" />
       </video>
 
       {/* Background Grid Overlay */}
@@ -75,7 +76,7 @@ export default function HomePage() {
               </div>
               
               <h1 className="text-5xl lg:text-7xl font-medium tracking-[-0.05em] text-white leading-tight mb-8 max-w-2xl">
-                Innovating the <br />
+                Innovating with <br />
                 <span className="font-serif italic text-white/80">intelligence of</span> Repolens AI
               </h1>
 
@@ -160,13 +161,44 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Community Card */}
-            <div className="liquid-glass w-64 rounded-3xl p-6 mt-4">
-              <h3 className="font-serif italic text-xl text-white mb-3">Explore our dashboard</h3>
-              <p className="text-xs text-white/60 leading-relaxed">
-                Connect your repositories and let the AI unravel the complexity in seconds.
-              </p>
-            </div>
+            {/* Futuristic Robo Animation */}
+            <motion.div 
+              className="liquid-glass w-64 rounded-3xl p-6 mt-4 flex flex-col items-center justify-center relative overflow-hidden h-40"
+            >
+              {/* Glowing Orb */}
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }} 
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute w-32 h-32 bg-white/20 rounded-full blur-3xl"
+              />
+              
+              {/* Floating Bot */}
+              <motion.div
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10"
+              >
+                <div className="relative">
+                  <Bot className="w-14 h-14 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]" strokeWidth={1} />
+                  {/* Scanner line over the bot */}
+                  <motion.div 
+                    animate={{ top: ['0%', '100%', '0%'] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    className="absolute left-0 w-full h-[1px] bg-white shadow-[0_0_8px_#ffffff]"
+                  />
+                </div>
+              </motion.div>
+              
+              {/* Status Text */}
+              <motion.div 
+                className="mt-4 flex items-center gap-2 text-[10px] font-mono text-white/70 tracking-widest uppercase relative z-10"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_5px_#ffffff]" />
+                System Active
+              </motion.div>
+            </motion.div>
 
             {/* Bottom Feature Section */}
             <div className="mt-auto liquid-glass rounded-[2.5rem] p-6 flex gap-4">
@@ -338,7 +370,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex gap-4 text-sm text-white/50">
-              <Link href="https://github.com" className="hover:text-white transition-colors">GitHub</Link>
+              <Link href="https://github.com/bip-krishna" className="hover:text-white transition-colors">GitHub</Link>
               <Link href="#" className="hover:text-white transition-colors">Features</Link>
             </div>
           </div>
