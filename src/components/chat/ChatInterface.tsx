@@ -16,6 +16,52 @@ const suggestedQuestions = [
   "Explain the API flow",
 ];
 
+function parseMessageContent(content: string) {
+  if (!content) return null;
+
+  // Simple parser to separate code blocks from text
+  const parts = content.split(/(```[\s\S]*?```)/g);
+
+  return parts.map((part, i) => {
+    if (part.startsWith("```")) {
+      const match = part.match(/```(\w*)\n([\s\S]*?)```/);
+      const language = match ? match[1] : "";
+      const code = match ? match[2] : part.slice(3, -3);
+
+      return (
+        <div key={i} className="my-2 rounded-lg overflow-hidden border border-white/10 bg-black/40 font-mono text-xs">
+          {language && (
+            <div className="bg-white/5 px-3 py-1 text-[10px] text-white/40 border-b border-white/5 flex items-center justify-between">
+              <span>{language}</span>
+            </div>
+          )}
+          <pre className="p-3 overflow-x-auto text-white/90">
+            <code>{code}</code>
+          </pre>
+        </div>
+      );
+    }
+
+    // Highlight file path mentions like `src/app/page.tsx`
+    const words = part.split(/(\b[\w\-./]+\.[a-zA-Z]{2,4}\b)/g);
+    return (
+      <span key={i}>
+        {words.map((word, j) => {
+          const isFilePath = /\b[\w\-./]+\.[a-zA-Z]{2,4}\b/.test(word);
+          if (isFilePath && !word.startsWith("http")) {
+            return (
+              <code key={j} className="bg-white/10 px-1.5 py-0.5 rounded text-xs font-mono text-purple-300">
+                {word}
+              </code>
+            );
+          }
+          return word;
+        })}
+      </span>
+    );
+  });
+}
+
 function MessageBubble({ message }: { message: ChatMessage }) {
   const isUser = message.role === "user";
   return (
@@ -29,16 +75,18 @@ function MessageBubble({ message }: { message: ChatMessage }) {
           <Bot className="h-4 w-4 text-white" />
         </div>
       )}
-      <div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+      <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
         isUser ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white" : "glass"
       }`}>
-        <div className="whitespace-pre-wrap">{message.content || (
-          <span className="inline-flex gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "0ms" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "150ms" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "300ms" }} />
-          </span>
-        )}</div>
+        <div className="whitespace-pre-wrap">
+          {message.content ? parseMessageContent(message.content) : (
+            <span className="inline-flex gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "300ms" }} />
+            </span>
+          )}
+        </div>
       </div>
       {isUser && (
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10">
