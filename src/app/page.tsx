@@ -49,7 +49,7 @@ export default function HomePage() {
 
       {/* Scrollable Content Container */}
       <div className="relative z-10 flex flex-col w-full">
-        
+
         {/* HERO SECTION */}
         <div className="flex flex-col lg:flex-row min-h-screen p-4 lg:p-6 gap-6">
           {/* Left Panel */}
@@ -61,8 +61,8 @@ export default function HomePage() {
                   <Hexagon className="w-4 h-4 text-white" />
                 </div>
                 <span className="font-semibold text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/30 drop-shadow-sm">
-                repolens
-              </span>
+                  repolens
+                </span>
               </div>
               <button className="liquid-glass w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
                 <Menu className="w-4 h-4 text-white" />
@@ -74,7 +74,7 @@ export default function HomePage() {
               <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-8">
                 <Hexagon className="w-10 h-10 text-white" />
               </div>
-              
+
               <h1 className="text-5xl lg:text-7xl font-medium tracking-[-0.05em] text-white leading-tight mb-8 max-w-2xl">
                 Innovating with <br />
                 <span className="font-serif italic text-white/80">intelligence of</span> Repolens AI
@@ -92,8 +92,8 @@ export default function HomePage() {
                     placeholder="Paste a GitHub URL or owner/repo..."
                     className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white/40 h-10"
                   />
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isLoading}
                     className="w-10 h-10 shrink-0 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors disabled:opacity-50"
                   >
@@ -161,7 +161,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-          
+
             {/* Bottom Feature Section */}
             <div className="mt-auto liquid-glass rounded-[2.5rem] p-6 flex gap-4">
               <Link href="/dashboard" className="flex-1 liquid-glass rounded-3xl p-6 flex flex-col justify-between aspect-square group hover:scale-105 transition-transform cursor-pointer">
@@ -191,11 +191,11 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <span className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-3 block">FEATURES</span>
             <h2 className="text-4xl lg:text-5xl font-medium tracking-tight mb-4 text-white">
-              Everything You Need to<br/><span className="font-serif italic text-white/80">Understand Any Codebase</span>
+              Everything You Need to<br /><span className="font-serif italic text-white/80">Understand Any Codebase</span>
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto">From repository analysis to interactive chat — a complete toolkit for understanding unfamiliar codebases.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="liquid-glass rounded-3xl p-8 hover:scale-[1.02] transition-transform">
               <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
@@ -259,7 +259,7 @@ export default function HomePage() {
             <div className="w-px h-8 bg-gradient-to-b from-white/30 to-white/10"></div>
             <div className="liquid-glass px-8 py-4 rounded-full border border-white/10 text-white font-medium z-10">Code Parser</div>
             <div className="w-px h-8 bg-gradient-to-b from-white/30 to-white/10"></div>
-            
+
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full z-10 relative">
               <div className="md:hidden absolute w-px h-[calc(100%+32px)] bg-gradient-to-b from-white/30 to-white/10 z-0"></div>
               <div className="hidden md:block absolute w-[60%] h-px bg-white/10 z-0"></div>
@@ -270,7 +270,7 @@ export default function HomePage() {
               <div className="liquid-glass-strong px-8 py-4 rounded-full border border-white/20 text-white font-medium z-10 w-full md:w-auto text-center mx-4">Architecture</div>
               <div className="liquid-glass px-8 py-4 rounded-full border border-white/10 text-white/80 text-sm z-10 w-full md:w-auto text-center">Dependency Map</div>
             </div>
-            
+
             <div className="w-px h-8 bg-gradient-to-b from-white/30 to-white/10"></div>
             <div className="liquid-glass-strong px-10 py-4 rounded-full border border-white/20 text-white font-medium z-10">Frontend UI</div>
           </div>
@@ -296,7 +296,7 @@ export default function HomePage() {
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-white/80"></div> React Flow</div>
               </div>
             </div>
-            
+
             <div className="liquid-glass rounded-3xl p-8">
               <h3 className="text-sm font-medium tracking-widest text-white/50 mb-6 uppercase">Backend & AI</h3>
               <div className="flex flex-wrap gap-3">
@@ -326,7 +326,7 @@ export default function HomePage() {
               </div>
               <span className="font-semibold tracking-tight text-white text-sm">RepoLens</span>
             </div>
-            
+
             <div className="text-white/50 text-sm flex items-center">
               © 2026 RepoLens AI. Built with <Heart className="w-3 h-3 text-white/80 mx-1" fill="currentColor" /> by Krishna.
             </div>

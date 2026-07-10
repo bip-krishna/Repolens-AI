@@ -87,3 +87,253 @@ Provide a structured JSON response:
 
 Return ONLY valid JSON, no markdown fences.`;
 }
+
+export function repoOverviewPrompt(repoName: string, tree: string, readme: string | null, packageJson: string | null, languages: string) {
+  return `Analyze this GitHub repository and provide a comprehensive overview: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${readme ? `## README:\n${readme.slice(0, 2000)}` : "No README available."}
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+## Languages: ${languages}
+
+Provide a structured JSON response:
+{
+  "description": "2-3 sentence description of what this project does",
+  "problemSolved": "The main problem this project solves",
+  "targetUsers": ["list of target user types"],
+  "maturityLevel": "Prototype" | "MVP" | "Production" | "Enterprise",
+  "technologies": ["list of key technologies used"],
+  "complexity": "Low" | "Medium" | "High" | "Very High",
+  "bestSuitedFor": ["hackathons", "production apps", "learning", etc.],
+  "highlights": ["3-5 notable things about this repo"]
+}
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function codeQualityPrompt(repoName: string, tree: string, packageJson: string | null, readme: string | null) {
+  return `Score the code quality of this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+${readme ? `## README:\n${readme.slice(0, 1500)}` : ""}
+
+Score each dimension from 0 to 100 based on what you can infer from the structure, dependencies, and configuration:
+
+{
+  "overall": number,
+  "breakdown": {
+    "documentation": number,
+    "testing": number,
+    "naming": number,
+    "architecture": number,
+    "maintainability": number
+  },
+  "suggestions": ["3-5 improvement suggestions"]
+}
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function healthDashboardPrompt(repoName: string, tree: string, packageJson: string | null, readme: string | null) {
+  return `Evaluate the overall health of this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+${readme ? `## README:\n${readme.slice(0, 1500)}` : ""}
+
+Score each health dimension from 0 to 100:
+
+{
+  "architecture": number,
+  "documentation": number,
+  "security": number,
+  "testing": number,
+  "maintainability": number,
+  "performance": number
+}
+
+Consider: folder structure, presence of tests, CI/CD, linting, type safety, documentation, dependency management, error handling patterns.
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function featureExtractionPrompt(repoName: string, tree: string, packageJson: string | null) {
+  return `Identify all features implemented in this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 4000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+
+Identify features from this list (and any others you detect):
+Authentication, Payments, Dashboard, AI/ML, Chatbot, Admin Panel, Analytics, Notifications, OAuth, CRUD, Realtime, REST API, GraphQL, Database, Caching, File Upload, Email, Search, Internationalization, Dark Mode, SSR, PWA, Testing, CI/CD, Logging, Rate Limiting, WebSocket
+
+{
+  "features": [
+    {
+      "name": "Feature Name",
+      "confidence": 0.0-1.0,
+      "category": "auth|payments|ui|data|infra|ai|communication|other",
+      "files": ["relevant/file/paths"]
+    }
+  ]
+}
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function securityAnalysisPrompt(repoName: string, tree: string, packageJson: string | null) {
+  return `Perform a security analysis of this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+
+Analyze for:
+1. Potential hardcoded secrets or API keys (based on file names/patterns)
+2. Known vulnerable dependency patterns
+3. Exposed API endpoints without apparent auth
+4. Dangerous permissions or configurations
+
+{
+  "overallScore": 0-100,
+  "secretsDetected": number,
+  "vulnerabilities": [{"name": "string", "severity": "low|medium|high|critical", "description": "string"}],
+  "exposedAPIs": ["list of potentially unprotected endpoints"],
+  "dangerousPermissions": ["list of risky patterns found"]
+}
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function aiSuggestionsPrompt(repoName: string, tree: string, packageJson: string | null) {
+  return `Provide actionable improvement suggestions for this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 4000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+
+Analyze and suggest improvements in these categories:
+- refactor: Extract duplicate code, simplify complex logic
+- test: Missing test files or test coverage
+- dead-code: Unused files, imports, or exports
+- structure: Folder reorganization, better separation of concerns
+- dependency: Outdated, unused, or redundant packages
+- security: Security improvements
+- performance: Performance optimizations
+
+{
+  "suggestions": [
+    {
+      "type": "refactor|test|dead-code|structure|dependency|security|performance",
+      "severity": "info|warning|error",
+      "title": "Short title",
+      "description": "Detailed explanation",
+      "files": ["affected/files"],
+      "fix": "How to fix this (optional)"
+    }
+  ]
+}
+
+Provide 5-10 suggestions. Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function complexityMetricsPrompt(repoName: string, tree: string, packageJson: string | null) {
+  return `Evaluate the complexity metrics of this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+
+Score each dimension from 0 to 100:
+
+{
+  "maintainability": number,
+  "readability": number,
+  "coupling": number,
+  "documentation": number,
+  "testCoverage": number,
+  "scalability": number
+}
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function executionFlowPrompt(repoName: string, tree: string, packageJson: string | null) {
+  return `Analyze the typical execution flow of this application: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+
+Trace the flow from user entry point through the application layers.
+
+{
+  "nodes": [
+    {"id": "unique-id", "label": "Display Name", "type": "entry|frontend|middleware|backend|database|external|response", "description": "What happens at this step"}
+  ],
+  "edges": [
+    {"source": "source-id", "target": "target-id", "label": "optional description of the connection"}
+  ]
+}
+
+Include 6-12 nodes covering the full request/response cycle. Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function learningModePrompt(repoName: string, tree: string, readme: string | null, packageJson: string | null) {
+  return `Create an interactive learning walkthrough for newcomers to this repository: ${repoName}
+
+## File Structure:
+${tree.slice(0, 3000)}
+
+${readme ? `## README:\n${readme.slice(0, 2000)}` : ""}
+${packageJson ? `## package.json:\n${packageJson.slice(0, 1500)}` : ""}
+
+{
+  "steps": [
+    {
+      "order": 1,
+      "title": "Step Title",
+      "description": "Detailed explanation of what to learn in this step",
+      "keyFiles": ["relevant/file/paths"],
+      "concepts": ["key concepts to understand"],
+      "tips": ["helpful tips for this step"]
+    }
+  ]
+}
+
+Create 6-8 progressive learning steps from overview to deep understanding.
+Return ONLY valid JSON, no markdown fences.`;
+}
+
+export function impactAnalysisPrompt(filePath: string, tree: string, repoName: string) {
+  return `Analyze the impact of changing this file in the repository: ${repoName}
+
+## File being changed: ${filePath}
+
+## Full File Structure:
+${tree.slice(0, 4000)}
+
+{
+  "affectedFiles": ["list of files that would be affected by changes to this file"],
+  "estimatedAffectedCount": number,
+  "riskLevel": "Low|Medium|High|Critical",
+  "reasoning": "Brief explanation of why this risk level",
+  "dependencies": ["files this file depends on"],
+  "dependents": ["files that depend on this file"]
+}
+
+Return ONLY valid JSON, no markdown fences.`;
+}
+
