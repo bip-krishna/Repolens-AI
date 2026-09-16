@@ -1,7 +1,7 @@
 import Groq from "groq-sdk";
 import type { AISummary, OnboardingGuide } from "@/types";
 
-const MODEL = "llama-3.3-70b-versatile"; // Very fast and smart model
+const MODEL = "openai/gpt-oss-120b"; // Very fast and smart model
 
 function getClient() {
   const apiKey = process.env.GROQ_API_KEY;
